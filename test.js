@@ -10,9 +10,8 @@ console.log(
 
 console.log(
     forLoop(
-        1, 
         10, 
         [], 
-        (arr, start, end) => [...arr, start * 2]
+        (arr, idx, count) => [...arr, idx * 2]
     )
 );
