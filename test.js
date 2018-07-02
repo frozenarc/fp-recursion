@@ -12,6 +12,6 @@ console.log(
     forLoop(
         10, 
         [], 
-        (arr, idx, count) => [...arr, idx * 2]
+        (idx, arr, count) => [...arr, idx * 2]
     )
 );
