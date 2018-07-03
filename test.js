@@ -5,6 +5,7 @@ describe('recurFor', () => {
 
     it('Array', () => {
         const res = recurFor([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            .defRet([])
             .opr((val, arr = []) => [...arr, val + 1]);
 
         expect(res).to.deep.equal([2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
@@ -12,7 +13,8 @@ describe('recurFor', () => {
 
     it('Array', () => {
         const res = recurFor([])
-            .opr((val, arr) => [...arr, val + 1], []);
+            .defRet([])
+            .opr((val, arr) => [...arr, val + 1]);
 
         expect(res).to.deep.equal([]);
     });
@@ -56,15 +58,17 @@ describe('recurFor', () => {
 
 describe('forLoop', () => {
 
-    it('Array', () => {
+    it('Empty Array', () => {
         const res = recurTill(0)
-            .opr((idx, arr) => [...arr, idx * 2], []);
+            .defRet([])
+            .opr((idx, arr) => [...arr, idx * 2]);
 
         expect(res).to.deep.equal([]);
     });
 
     it('Array', () => {
         const res = recurTill(10)
+            .defRet([])
             .opr((idx, arr = []) => [...arr, idx * 2]);
 
         expect(res).to.deep.equal([0, 2, 4, 6, 8, 10, 12, 14, 16, 18]);

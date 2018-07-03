@@ -1,16 +1,31 @@
+const recurObj = {
+    defRet: function (_defRet) {
+        this._defRet = _defRet;
+        return this;
+    },
+    opr: function (_opr) {
+        this._opr = _opr;
+        return this;
+    }
+};
+
 function _recurFor(src, target, opr, idx, incr) {
     const newTarget = opr(src[idx], target, idx, src);
     return idx >= src.length - incr
         ? newTarget
         : _recurFor(src, newTarget, opr, idx + incr, incr)
-}
+};
 
 function recurFor(src, idx = 0, incr = 1) {
     return {
-        opr: (opr, target) => {
+        defRet: function (_defRet) {
+            this._defRet = _defRet;
+            return this;
+        },
+        opr: function (opr) {
             return src.length === 0
-                ? target
-                : _recurFor(src, target, opr, idx, incr);
+                ? this._defRet
+                : _recurFor(src, this._defRet, opr, idx, incr);
         }
     };
 };
@@ -20,14 +35,18 @@ function _recurTill(count, target, opr, idx, incr) {
     return idx >= count - incr
         ? newTarget
         : _recurTill(count, newTarget, opr, idx + incr, incr);
-}
+};
 
 function recurTill(count, idx = 0, incr = 1) {
     return {
-        opr: (opr, target) => {
-            return count === 0 
-            ? target
-            : _recurTill(count, target, opr, idx, incr);
+        defRet: function (_defRet) {
+            this._defRet = _defRet;
+            return this;
+        },
+        opr: function (opr) {
+            return count === 0
+                ? this._defRet
+                : _recurTill(count, this._defRet, opr, idx, incr);
         }
     };
 };
