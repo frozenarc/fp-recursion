@@ -12,7 +12,7 @@ Functional programming requires recursion instead of loop. Writing recursion des
 
 OR
 
-`const { forEach, forLoop } from 'fp-recursion';`
+`const { forEach, forLoop } = require('fp-recursion');`
 
 
 ### forEach
@@ -31,7 +31,7 @@ forEach(
 );
 ```
 
-* oprFunc (forEach)
+* oprFunc
 
 ```
 oprFunc(
@@ -81,3 +81,5 @@ oprFunc(
 const targetArr = forLoop(10, [], (idx, arr) => [...arr, idx * 2]);
 console.log(targetArr); //[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 ```
+
+Please check test cases for more examples.
