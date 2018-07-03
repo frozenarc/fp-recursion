@@ -38,7 +38,7 @@ describe('forEach', () => {
         )).to.deep.equal({ prev: { prev: { prev: {}, cur: 1 }, cur: 2 }, cur: 3 });
     });
 
-    it('Premitive Value', () => {
+    it('Primitive Value', () => {
         //4 + 1 + 2 + 3
         expect(forEach(
             [1, 2, 3], 
@@ -84,7 +84,7 @@ describe('forLoop', () => {
         )).to.deep.equal({ prev: { prev: { prev: {}, cur: 0 }, cur: 1 }, cur: 2 });
     });
 
-    it('Premitive Value', () => {
+    it('Primitive Value', () => {
         //4 + 0 + 1 + 2 + 3 + 4
         expect(forLoop(
             5, 
