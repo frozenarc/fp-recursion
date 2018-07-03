@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "mocha test.js"
   },
   "repository": {
     "type": "git",
@@ -14,12 +14,18 @@
     "resursion",
     "loop",
     "functional",
-    "programming"
+    "programming",
+    "fp",
+    "recur"
   ],
   "author": "Manan Panchal <mananvpanchal@gmail.com>",
   "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/mananvpanchal/recursive-loop/issues"
   },
-  "homepage": "https://github.com/mananvpanchal/recursive-loop#readme"
+  "homepage": "https://github.com/mananvpanchal/recursive-loop#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  }
 }
