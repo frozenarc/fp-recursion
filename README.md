@@ -1,6 +1,6 @@
 # fp-recursion
 
-Functional programming requires recursion instead of loop. Writing recursionn destracts sometimes developers from focusing more on business logic. So, to make use of recursion instead of loop and implement it easily the library can be used.
+Functional programming requires recursion instead of loop. Writing recursion destracts sometimes developers from focusing more on business logic. So, to make use of recursion instead of loop and implement it easily the library can be used.
 
 ### Install
 
@@ -41,7 +41,7 @@ oprFunc(
 )
 ```
 
-* Examplpe
+* Example
 
 ```
 const srcArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

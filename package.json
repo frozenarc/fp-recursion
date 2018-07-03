@@ -19,7 +19,7 @@
     "recur"
   ],
   "author": "Manan Panchal <mananvpanchal@gmail.com>",
-  "license": "BSD-3-Clause",
+  "license": "BSD 3-Clause",
   "bugs": {
     "url": "https://github.com/mananvpanchal/recursive-loop/issues"
   },
