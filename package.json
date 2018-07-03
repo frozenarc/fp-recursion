@@ -1,7 +1,7 @@
 {
   "name": "fp-recursion",
   "version": "1.0.0",
-  "description": "",
+  "description": "Recursion implemented for functional programming for replacement of loop",
   "main": "index.js",
   "scripts": {
     "test": "mocha test.js"
