@@ -1,5 +1,5 @@
 {
-  "name": "recursive-loop",
+  "name": "fp-recursion",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mananvpanchal/recursive-loop.git"
+    "url": "git+https://github.com/frozenarc/fp-recursion.git"
   },
   "keywords": [
     "resursion",
@@ -21,9 +21,9 @@
   "author": "Manan Panchal <mananvpanchal@gmail.com>",
   "license": "BSD 3-Clause",
   "bugs": {
-    "url": "https://github.com/mananvpanchal/recursive-loop/issues"
+    "url": "https://github.com/frozenarc/fp-recursion.git"
   },
-  "homepage": "https://github.com/mananvpanchal/recursive-loop#readme",
+  "homepage": "https://github.com/frozenarc/fp-recursion.git",
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.2.0"
