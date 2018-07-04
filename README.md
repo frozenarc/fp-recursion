@@ -8,21 +8,21 @@ Functional programming requires recursion instead of loop. Writing recursion des
 
 ### Usage
 
-`import { forEach, forLoop } from 'fp-recursion';`
+`import { recurEach, recurTill } from 'fp-recursion';`
 
 OR
 
-`const { forEach, forLoop } = require('fp-recursion');`
+`const { recurEach, recurTill } = require('fp-recursion');`
 
 
-### forEach
+### recurEach
 
 Iterates for each element of source array and generates new array / object / primitive value. 
 
 * Systax 
 
 ```
-forEach(
+recurEach(
     srcArray, // For each element of the source array the recursion executes
     target, // This can be any of type e.g. Array, Object, Primitive value. The value is passed to oprFunc and return value of oprFunc will be used as parameter to next call of oprFunc
     oprFunc, // The function will execute for each element of the source array
@@ -45,18 +45,20 @@ oprFunc(
 
 ```
 const srcArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const targetArr = forEach(srcArr, [], (val, arr) => [...arr, val + 1]);
+const targetArr = recurEach(srcArr)
+    .defRet([])
+    .opr((val, arr) => [...arr, val + 1]);
 console.log(targetArr); // [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 ```
 
-### forLoop
+### recurTill
 
 Iterates for no. of count value and generates new array / object / primitive value. 
 
 * Syntax
 
 ```
-forLoop(
+recurTill(
     count, // No. of times the recursion evaluates
     target, // This can be any of type e.g. Array, Object, Primitive value. The value is passed to oprFunc and return value of oprFunc will be used as parameter to next call of oprFunc
     oprFunc, // The function will execute for each element of the source array
@@ -65,7 +67,7 @@ forLoop(
 )
 ```
 
-* oprFunc (forEach)
+* oprFunc
 
 ```
 oprFunc(
@@ -78,7 +80,9 @@ oprFunc(
 * Example
 
 ```
-const targetArr = forLoop(10, [], (idx, arr) => [...arr, idx * 2]);
+const targetArr = recurTill(10)
+    .defRet([])
+    .opr((idx, arr) => [...arr, idx * 2]);
 console.log(targetArr); //[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 ```
 

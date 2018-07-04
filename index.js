@@ -1,22 +1,22 @@
-const _defRet = function (_defRet) {
+const defRet = function (_defRet) {
     this._defRet = _defRet;
     return this;
 };
 
-function _recurFor(src, target, opr, idx, incr) {
+function _recurEach(src, target, opr, idx, incr) {
     const newTarget = opr(src[idx], target, idx, src);
     return idx >= src.length - incr
         ? newTarget
-        : _recurFor(src, newTarget, opr, idx + incr, incr)
+        : _recurEach(src, newTarget, opr, idx + incr, incr)
 };
 
-function recurFor(src, idx = 0, incr = 1) {
+function recurEach(src, idx = 0, incr = 1) {
     return {
-        defRet: _defRet,
+        defRet,
         opr: function (opr) {
             return src.length === 0
                 ? this._defRet
-                : _recurFor(src, this._defRet, opr, idx, incr);
+                : _recurEach(src, this._defRet, opr, idx, incr);
         }
     };
 };
@@ -30,7 +30,7 @@ function _recurTill(count, target, opr, idx, incr) {
 
 function recurTill(count, idx = 0, incr = 1) {
     return {
-        defRet: _defRet,
+        defRet,
         opr: function (opr) {
             return count === 0
                 ? this._defRet
@@ -39,5 +39,5 @@ function recurTill(count, idx = 0, incr = 1) {
     };
 };
 
-exports.recurFor = recurFor;
+exports.recurEach = recurEach;
 exports.recurTill = recurTill;
