@@ -36,7 +36,7 @@ recurEach(
 ```
 oprFunc(
     ele, // Element of source array
-    target, // To be used to compute new value and return from the function. The returned value will get here in next iteration
+    target, // To be used to compute new value and return it from the function. The returned value will be get here in next iteration
     idx // Currennt index
 )
 ```
@@ -72,7 +72,7 @@ recurTill(
 ```
 oprFunc(
     idx, // Currennt index
-    target, // To be used to compute new value and return from the function. The returned value will get here in next iteration
+    target, // To be used to compute new value and return it from the function. The returned value will be get here in next iteration
     count // Initial value of count
 )
 ```
