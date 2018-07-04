@@ -1,40 +1,40 @@
-const defRet = function (_defRet) {
-    this._defRet = _defRet;
+const initVal = function (_initVal) {
+    this._initVal = _initVal;
     return this;
 };
 
-function _recurEach(src, target, opr, idx, incr) {
-    const newTarget = opr(src[idx], target, idx, src);
+function _recurEach(src, value, opr, idx, incr) {
+    const newValue = opr(src[idx], value, idx, src);
     return idx >= src.length - incr
-        ? newTarget
-        : _recurEach(src, newTarget, opr, idx + incr, incr)
+        ? newValue
+        : _recurEach(src, newValue, opr, idx + incr, incr)
 };
 
 function recurEach(src, idx = 0, incr = 1) {
     return {
-        defRet,
+        initVal,
         opr: function (opr) {
             return src.length === 0
-                ? this._defRet
-                : _recurEach(src, this._defRet, opr, idx, incr);
+                ? this._initVal
+                : _recurEach(src, this._initVal, opr, idx, incr);
         }
     };
 };
 
-function _recurTill(count, target, opr, idx, incr) {
-    const newTarget = opr(idx, target, count);
+function _recurTill(count, value, opr, idx, incr) {
+    const newValue = opr(idx, value, count);
     return idx >= count - incr
-        ? newTarget
-        : _recurTill(count, newTarget, opr, idx + incr, incr);
+        ? newValue
+        : _recurTill(count, newValue, opr, idx + incr, incr);
 };
 
 function recurTill(count, idx = 0, incr = 1) {
     return {
-        defRet,
+        initVal,
         opr: function (opr) {
             return count === 0
-                ? this._defRet
-                : _recurTill(count, this._defRet, opr, idx, incr);
+                ? this._initVal
+                : _recurTill(count, this._initVal, opr, idx, incr);
         }
     };
 };

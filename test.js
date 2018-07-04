@@ -5,7 +5,7 @@ describe('recurEach', () => {
 
     it('Empty Array', () => {
         const res = recurEach([])
-            .defRet([])
+            .initVal([])
             .opr((val, arr) => [...arr, val + 1]);
 
         expect(res).to.deep.equal([]);
@@ -13,7 +13,7 @@ describe('recurEach', () => {
 
     it('Array', () => {
         const res = recurEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-            .defRet([])
+            .initVal([])
             .opr((val, arr = []) => [...arr, val + 1]);
 
         expect(res).to.deep.equal([2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
@@ -53,7 +53,7 @@ describe('recurTill', () => {
 
     it('Empty Array', () => {
         const res = recurTill(0)
-            .defRet([])
+            .initVal([])
             .opr((idx, arr) => [...arr, idx * 2]);
 
         expect(res).to.deep.equal([]);
@@ -61,7 +61,7 @@ describe('recurTill', () => {
 
     it('Array', () => {
         const res = recurTill(10)
-            .defRet([])
+            .initVal([])
             .opr((idx, arr = []) => [...arr, idx * 2]);
 
         expect(res).to.deep.equal([0, 2, 4, 6, 8, 10, 12, 14, 16, 18]);

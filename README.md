@@ -14,6 +14,7 @@ OR
 
 `const { recurEach, recurTill } = require('fp-recursion');`
 
+Please check github page for latest documentation. Because only doc changes would not be published.
 
 ### recurEach
 
@@ -23,11 +24,13 @@ Iterates for each element of source array and generates new array / object / pri
 
 ```
 recurEach(
-    srcArray, // For each element of the source array the recursion executes
-    target, // This can be any of type e.g. Array, Object, Primitive value. The value is passed to oprFunc and return value of oprFunc will be used as parameter to next call of oprFunc
-    oprFunc, // The function will execute for each element of the source array
+    srcArray, // oprFunc will call for each element of the source array
     idx, // Default value is 0. Index from which evaluation starts.
-    incr // Default value is 1. Increment value to evaluate next element.
+    incr // Default value is 1. Increment value to evaluate next element
+).initVal( //The function accepts initial value
+    value, // The value will be passed to oprFunc and the function should return new computed value which again will be passed to next iteration of oprFunc. The process continues untill recursion ends. The value can be any of type e.g. Array, Object, Primitive
+).opr(
+    oprFunc, // The function will be executed for each element of the source array, with initial value / computed value
 );
 ```
 
@@ -36,8 +39,9 @@ recurEach(
 ```
 oprFunc(
     ele, // Element of source array
-    target, // To be used to compute new value and return it from the function. The returned value will be get here in next iteration
-    idx // Currennt index
+    value, // To be used to compute new value and return it from the function. The returned value will be passed here in next iteration
+    idx, // Current index
+    srcArray //Whole source array for handling some unexpected scenario
 )
 ```
 
@@ -45,11 +49,22 @@ oprFunc(
 
 ```
 const srcArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const targetArr = recurEach(srcArr)
-    .defRet([])
+const resArr = recurEach(srcArr)
+    .initVal([])
     .opr((val, arr) => [...arr, val + 1]);
-console.log(targetArr); // [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+console.log(resArr); // [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 ```
+
+There are two way to pass initial value. 
+
+1. You can pass it into `initVal`.
+2. You can use default argument of `oprFunc` as shown below.
+
+```
+.opr((val, arr = []) => [...arr, val + 1]);
+```
+But, if source array is empty in that case second way will return `undefined` if you dont handle the case in `oprFunc`. So, first way is recommended to pass initial value.
+
 
 ### recurTill
 
@@ -59,11 +74,13 @@ Iterates for no. of count value and generates new array / object / primitive val
 
 ```
 recurTill(
-    count, // No. of times the recursion evaluates
-    target, // This can be any of type e.g. Array, Object, Primitive value. The value is passed to oprFunc and return value of oprFunc will be used as parameter to next call of oprFunc
-    oprFunc, // The function will execute for each element of the source array
+    count, // No. of times the oprFunc be called
     idx, // Default value is 0. Index from which evaluation starts.
-    incr // Default value is 1. Increment value to evaluate next element.
+    incr // Default value is 1. Increment value to evaluate next element
+).initVal( //The function accepts initial value
+    value, // The value will be passed to oprFunc and the function should return new computed value which again will be passed to next iteration of oprFunc. The process continues untill recursion ends. The value can be any of type e.g. Array, Object, Primitive
+).opr(
+    oprFunc, // The function will be executed for each index till count value
 )
 ```
 
@@ -72,18 +89,28 @@ recurTill(
 ```
 oprFunc(
     idx, // Currennt index
-    target, // To be used to compute new value and return it from the function. The returned value will be get here in next iteration
-    count // Initial value of count
+    value, // To be used to compute new value and return it from the function. The returned value will be passed here in next iteration
+    count // No. of times of recursion
 )
 ```
 
 * Example
 
 ```
-const targetArr = recurTill(10)
-    .defRet([])
+const resArr = recurTill(10)
+    .initVal([])
     .opr((idx, arr) => [...arr, idx * 2]);
-console.log(targetArr); //[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+console.log(resArr); //[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 ```
+There are two way to pass initial value. 
+
+1. You can pass it into `initVal`.
+2. You can use default argument of `oprFunc` as shown below.
+
+```
+.opr((val, arr = []) => [...arr, val + 1]);
+```
+But, if count value is 0 in that case second way will return `undefined` if you dont handle the case in `oprFunc`. So, first way is recommended to pass initial value.
+
 
 Please check test cases for more examples.
