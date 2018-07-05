@@ -3,38 +3,42 @@ const initVal = function (_initVal) {
     return this;
 };
 
-function _recurEach(src, value, opr, idx, incr) {
-    const newValue = opr(src[idx], value, idx, src);
-    return idx >= src.length - incr
-        ? newValue
-        : _recurEach(src, newValue, opr, idx + incr, incr)
+function shouldEnd(length, idx, incr, till) {
+    return till && length >= till ? idx >= till - incr : idx >= length - incr
 };
 
-function recurEach(src, idx = 0, incr = 1) {
+function _recurEach(src, value, opr, idx, incr, till) {
+    const newValue = opr(src[idx], value, idx, src);
+    return shouldEnd(src.length, idx, incr, till)
+        ? newValue
+        : _recurEach(src, newValue, opr, idx + incr, incr, till);
+};
+
+function recurEach(src, idx = 0, incr = 1, till) {
     return {
         initVal,
         opr: function (opr) {
             return src.length === 0
                 ? this._initVal
-                : _recurEach(src, this._initVal, opr, idx, incr);
+                : _recurEach(src, this._initVal, opr, idx, incr, till);
         }
     };
 };
 
-function _recurTill(count, value, opr, idx, incr) {
-    const newValue = opr(idx, value, count);
-    return idx >= count - incr
+function _recurTill(till, value, opr, idx, incr) {
+    const newValue = opr(idx, value, till);
+    return idx >= till - incr
         ? newValue
-        : _recurTill(count, newValue, opr, idx + incr, incr);
+        : _recurTill(till, newValue, opr, idx + incr, incr);
 };
 
-function recurTill(count, idx = 0, incr = 1) {
+function recurTill(till, idx = 0, incr = 1) {
     return {
         initVal,
         opr: function (opr) {
-            return count === 0
+            return till === 0
                 ? this._initVal
-                : _recurTill(count, this._initVal, opr, idx, incr);
+                : _recurTill(till, this._initVal, opr, idx, incr);
         }
     };
 };

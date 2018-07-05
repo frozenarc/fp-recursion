@@ -14,9 +14,25 @@ describe('recurEach', () => {
     it('Array', () => {
         const res = recurEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
             .initVal([])
-            .opr((val, arr = []) => [...arr, val + 1]);
+            .opr((val, arr) => [...arr, val + 1]);
 
         expect(res).to.deep.equal([2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+    });
+
+    it('Array, idx = 0, incr = 2, end = 7', () => {
+        const res = recurEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0, 2, 7)
+            .initVal([])
+            .opr((val, arr) => [...arr, val]);
+
+        expect(res).to.deep.equal([1, 3, 5, 7]);
+    });
+
+    it('Array, idx = 0, incr = 2, end = 7', () => {
+        const res = recurEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0, 6, 11)
+            .initVal([])
+            .opr((val, arr) => [...arr, val]);
+
+        expect(res).to.deep.equal([1, 7]);
     });
 
     it('Array, idx = 3', () => {
@@ -94,5 +110,14 @@ describe('recurTill', () => {
             .opr((idx, prim = 4) => prim + idx);
 
         expect(res).to.equal(14);
+    });
+
+    it('Primitive, factorial', () => {
+        //1 * 1 * 2 * 3 * 4 * 5
+        const res = recurTill(6, 1)
+            .initVal(1)
+            .opr((idx, fact) => fact * idx);
+
+        expect(res).to.equal(120);
     });
 });
