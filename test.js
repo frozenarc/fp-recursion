@@ -1,4 +1,4 @@
-const { recurEach, recurTill } = require('./index');
+const { recurEach, recurTill, recurWhile } = require('./index');
 const expect = require('chai').expect;
 
 describe('recurEach', () => {
@@ -119,5 +119,25 @@ describe('recurTill', () => {
             .opr((idx, fact) => fact * idx);
 
         expect(res).to.equal(120);
+    });
+});
+
+
+describe('recurWhile', () => {
+
+    it('Primitive', () => {
+        const res = recurWhile((val) => val !== 10)
+        .initVal(0)
+        .opr((val) => val + 1);
+
+        expect(res).to.equal(10);
+    });
+
+    it('Array', () => {
+        const res = recurWhile((val) => val.length !== 10)
+        .initVal([])
+        .opr((val) => [...val, 0]);
+        
+        expect(res).to.deep.equal([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     });
 });
