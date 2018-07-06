@@ -4,8 +4,8 @@ const initVal = function (_initVal) {
 };
 
 function shouldEnd(length, idx, till) {
-    return till && length >= till 
-        ? idx >= till 
+    return till && length >= till
+        ? idx >= till
         : idx >= length
 };
 
@@ -40,11 +40,9 @@ function recurTill(till, idx = 0, incr = 1) {
 };
 
 function _recurWhile(con, value, opr) {
-    if(!con(value)) {
-        return value;
-    } else {
-        return _recurWhile(con, opr(value), opr)
-    }
+    return !con(value)
+        ? value
+        : _recurWhile(con, opr(value), opr);
 }
 
 function recurWhile(con) {

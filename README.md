@@ -8,15 +8,15 @@ Functional programming requires recursion instead of loop. Writing recursion des
 
 ### Usage
 
-`import { recurEach, recurTill } from 'fp-recursion';`
+`import { recurEach, recurTill, recurWhile } from 'fp-recursion';`
 
 OR
 
-`const { recurEach, recurTill } = require('fp-recursion');`
+`const { recurEach, recurTill, recurWhile } = require('fp-recursion');`
 
 ### recurEach
 
-Iterates for each element of source array and generates new array / object / primitive value. 
+Iterates for each element of source array and generates new value based on initial value. 
 
 * Systax 
 
@@ -38,7 +38,7 @@ recurEach(
 ```
 oprFunc(
     ele, // Element of source array
-    value, // To be used to compute new value and the new valuue shoudl be returned from the function. The returned value will be passed here in next iteration
+    value, // To be used to compute a new value and the new value should be returned from the function. The returned value will be passed here in next iteration
     idx, // Current index
     srcArray //Whole source array for handling some unexpected scenario
 ) // The function should return a new computed value
@@ -68,7 +68,7 @@ But, if source array is empty in that case second way will return `undefined` if
 
 ### recurTill
 
-Iterates for no. of till value and generates new array / object / primitive value. 
+Iterates for no. of till value and generates new value based on initial value. 
 
 * Syntax
 
@@ -89,7 +89,7 @@ recurTill(
 ```
 oprFunc(
     idx, // Currennt index
-    value, // To be used to compute new value and the new valuue shoudl be returned from the function. The returned value will be passed here in next iteration
+    value, // To be used to compute a new value and the new value should be returned from the function. The returned value will be passed here in next iteration
     till // No. of times of recursion
 ) // The function should return a new computed value
 ```
@@ -112,6 +112,51 @@ recurTill(10)
     .opr((val, arr = []) => [...arr, val + 1]);
 ```
 But, if till value is 0 in that case second way will return `undefined` if you dont handle the case in `oprFunc`. So, first way is recommended to pass initial value.
+
+
+### recurWhile
+
+Iterates till condition isn't be false and generates new value based on initial value. 
+
+* Syntax
+
+```
+recurWhile(
+    conFunc, // The function has initial value as parameter and returns `true` or `false`. If it returns `true` recursion continues otherwise starts returning
+).initVal( //The function accepts initial value
+    value, // The value will be passed to oprFunc and conFunc. conFunc should return boolean and oprFunc should return new computed value which again will be passed to next iteration of oprFunc and conFunc. The process continues untill recursion ends. The value can be any of type e.g. Array, Object, Primitive
+).opr(
+    oprFunc, // The function will be executed untill conFunc returns `false`
+)
+```
+
+* conFunc
+
+```
+conFunc(
+    value //Based on the value the function should return either `true` or `false`
+)
+```
+
+* oprFunc
+
+```
+oprFunc(
+    value, // To be used to compute a new value and the new value should be returned from the function. The returned value will be passed here and in conFunc in next iteration
+) // The function should return a new computed value
+```
+
+* Example
+
+```
+const res = recurWhile((val) => val !== 10)
+        .initVal(0)
+        .opr((val) => val + 1);
+
+console.log(res); //10
+```
+
+We cannot pass initial value as default argument with `recurWhile`.
 
 
 Please check test cases for more examples.
